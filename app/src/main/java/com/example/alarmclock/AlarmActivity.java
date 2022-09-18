@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AlarmActivity extends AppCompatActivity {
-    Ringtone    ringtone; 
+    Ringtone    ringtone; //AGIGA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
