@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -23,6 +24,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     Button setAlarmBtn;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(Calendar.MILLISECOND,0);
                 calendar.set(Calendar.MINUTE, materialTimePicker.getMinute());
                 calendar.set(Calendar.HOUR_OF_DAY, materialTimePicker.getHour());
-
+                if (calendar.getTimeInMillis() <= System.currentTimeMillis()) {
+                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+                }
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
                 AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), getAlarmInfoPendingIntent());
 
                 alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent());
                 Toast.makeText(this,"Будильник установлен на: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
+                FillViewAlarms(calendar);
             });
             materialTimePicker.show(getSupportFragmentManager(), "tag_picker");
         });
@@ -63,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+
+    }
+
+    private void FillViewAlarms(Calendar calendar) {
+        textView = findViewById(R.id.textView1);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM  HH:mm", Locale.getDefault() );
+        textView.setText("Будильник установлен на: "+ sdf.format(calendar.getTime()));
 
     }
 
