@@ -2,4 +2,6 @@
     <string name="app_name">Будильник</string>
     <string name="mainText">Установить будильник</string>
     <string name="alarmText">!Подъем, солнышко!</string>
+    <string name="stopAlarm">Стоп</string>
+    <string name="holdAlarm">Отложить</string>
 </resources>

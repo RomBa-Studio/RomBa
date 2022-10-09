@@ -2,4 +2,6 @@
     <string name="app_name">AlarmClock</string>
     <string name="mainText">Setup alarm clock</string>
     <string name="alarmText">!Wake up!</string>
+    <string name="stopAlarm">Stop</string>
+    <string name="holdAlarm">Hold</string>
 </resources>

@@ -21,14 +21,14 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    AlarmManager.AlarmClockInfo alarmClockInfo;
+    private Button setAlarmBtn;
 
-    Button setAlarmBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault() );
-
         setAlarmBtn = findViewById(R.id.SetupClockButton);
         setAlarmBtn.setOnClickListener(v ->{
             MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-                AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), getAlarmInfoPendingIntent());
+                alarmClockInfo = new AlarmManager.AlarmClockInfo(calendar.getTimeInMillis(), getAlarmInfoPendingIntent());
 
                 alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent());
                 Toast.makeText(this,"Будильник установлен на: " + sdf.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
             materialTimePicker.show(getSupportFragmentManager(), "tag_picker");
         });
         String x = getPackageName();
+
+
+
         // Если не работает будильник в android 10, нужно запросить разрешение на показ окон поверх других приложений
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
@@ -75,8 +78,13 @@ public class MainActivity extends AppCompatActivity {
 
     private PendingIntent getAlarmActionPendingIntent(){
         Intent intent = new Intent(this, AlarmActivity.class);
+        intent.putExtra("1", alarmClockInfo);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         return PendingIntent.getActivity(this,1,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    public AlarmManager.AlarmClockInfo GetAlarmClockInfo() {
+        return  alarmClockInfo;
     }
 }

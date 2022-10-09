@@ -20,12 +20,21 @@
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="88dp"
         android:onClick="StopAlarmClock"
-        android:text="Button"
+        android:text="@string/stopAlarm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Стоп" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="86dp"
+        android:onClick="HoldAlarmClock"
+        android:text="@string/holdAlarm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Отложить" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
