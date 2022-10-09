@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AlarmActivity extends AppCompatActivity {
-    Ringtone    ringtone; //AGIGA
+    Ringtone    ringtone;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -37,7 +37,6 @@ public class AlarmActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
         if(ringtone != null && ringtone.isPlaying()){
             ringtone.stop();
         }
